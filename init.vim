@@ -29,6 +29,8 @@ Plug 'christoomey/vim-tmux-navigator'
 
 " colorschemes
 Plug 'flazz/vim-colorschemes'
+Plug 'fatih/molokai'
+Plug 'bluz71/vim-moonfly-colors'
 
 " live markdown preview & syntax
 Plug 'shime/vim-livedown', {'for':  'markdown'}
@@ -56,6 +58,7 @@ Plug 'davidhalter/jedi-vim', {'for': 'python'}
 
 " go 
 Plug 'fatih/vim-go', {'for':'go'}
+Plug 'AndrewRadev/splitjoin.vim'
 
 "toml syntax hightligh
 Plug 'cespare/vim-toml' 
@@ -64,23 +67,25 @@ call plug#end()
 
 " general
 "
-:cd /home/ub/Dropbox/cpp " default startup directory change
+:cd /home/carlo/Dropbox/go" default startup directory change
 
 
-colo Tomorrow-Night-Eighties
+colo moonfly
 set background=dark
 syntax on
 filetype plugin indent on
 set number
 set cursorline
 set colorcolumn=100 
+set encoding=UTF-8
 
 " Persistence undo
-set undodir=~/.vim/undodir
+set undodir=~/.vim/undodir 
 set undofile
 
 " Appereance
-"set guifont=Go\ Mono\ Regular\ Powerline\ 12
+"let g:Guifont=DroidSansMono\ Nerd\ Font\ 12
+"set g:Guifont=Go\ Mono\ Regular\ Powerline\ 12
 let g:Guifont="Fira Code:h12"
 set laststatus=2
 set encoding=utf-8
@@ -93,18 +98,40 @@ set timeoutlen=100 ttimeoutlen=1
 let mapleader = ","
 "airline colorscheme
 let g:airline_theme='cool'
+let g:airline_powerline_fonts = 1
+
+" golang stuff
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+autocmd FileType go nmap <leader>t  <Plug>(go-test)
+let g:go_fmt_autosave = 1
+let g:go_fmt_command = "goimports"
+
+" golang function text objects
+let g:go_textobj_include_function_doc = 1
+
+" golang camelcase fmt
+let g:go_addtags_transform = "camelcase"	
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_extra_types = 1
+" linting on save
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_autosave_enabled = ['vet', 'golint']
 
 "cd to the current directory for newtab i.e. terminal
-function! OnTabEnter(path)
-  if isdirectory(a:path)
-    let dirname = a:path
-  else
-    let dirname = fnamemodify(a:path, ":h")
-  endif
-  execute "tcd ". dirname
-endfunction()
+" doesn't work on normal vim
+"function! OnTabEnter(path)
+"  if isdirectory(a:path)
+"    let dirname = a:path
+"  else
+"    let dirname = fnamemodify(a:path, ":h")
+"  endif
+"  execute "tcd ". dirname
+"endfunction()
 
-autocmd TabNewEntered * call OnTabEnter(expand("<amatch>"))
+"autocmd TabNewEntered * call OnTabEnter(expand("<amatch>"))
 
 "cppbase download and change name
 function! NewCppProjectGit(dirname)
@@ -129,7 +156,7 @@ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType go setlocal omnifunc=gocomplete#CompleteTags
+autocmd FileType go setlocal omnifunc=go#complete#Complete
 autocmd FileType cpp setlocal omnifunc=cppcomplete#CompleteTags
 
 " ctags generation
