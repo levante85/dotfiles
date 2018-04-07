@@ -1,13 +1,14 @@
 set nocompatible              
 filetype off
 
-call plug#begin("~/.config/nvim/bundle")
+call plug#begin("~/.vim/bundle")
 " general
 Plug 'ervandew/supertab'
 Plug 'w0rp/ale' 
 Plug 'Townk/vim-autoclose'
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 " airline stuff
 Plug 'vim-airline/vim-airline'
@@ -65,18 +66,19 @@ Plug 'cespare/vim-toml'
 
 call plug#end()
 
-" general
+" general 
 "
-:cd /home/carlo/Dropbox/go" default startup directory change
+" default directory
+:cd /home/carlo/Dropbox/go/src/github.com/levante85/ 
 
 
-colo moonfly
-set background=dark
+colo github
 syntax on
 filetype plugin indent on
 set number
+set noswapfile
 set cursorline
-set colorcolumn=100 
+set colorcolumn=80
 set encoding=UTF-8
 
 " Persistence undo
@@ -84,9 +86,7 @@ set undodir=~/.vim/undodir
 set undofile
 
 " Appereance
-"let g:Guifont=DroidSansMono\ Nerd\ Font\ 12
-"set g:Guifont=Go\ Mono\ Regular\ Powerline\ 12
-let g:Guifont="Fira Code:h12"
+set guifont=Go\ Mono\ Regular\ Powerlineh\ 12
 set laststatus=2
 set encoding=utf-8
 set t_Co=256
@@ -96,6 +96,11 @@ set timeoutlen=100 ttimeoutlen=1
 
 " leader key remap
 let mapleader = ","
+
+" keep code folds around
+" autocmd BufWinLeave *.* mkview
+" autocmd BufWinEnter *.* silent loadview
+
 "airline colorscheme
 let g:airline_theme='cool'
 let g:airline_powerline_fonts = 1
@@ -108,7 +113,13 @@ let g:go_fmt_autosave = 1
 let g:go_fmt_command = "goimports"
 
 " golang function text objects
+let g:go_textobj_enabled = 1
 let g:go_textobj_include_function_doc = 1
+
+"vim-go
+let g:go_info_mode = 'gocode'
+let g:go_auto_sameids = 1
+let g:go_list_autoclose = 0
 
 " golang camelcase fmt
 let g:go_addtags_transform = "camelcase"	
@@ -178,7 +189,7 @@ nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 "tagbar keybinding
-nmap <c-s> :TagbarToggle<CR>
+map <F8> :TagbarToggle<CR>
 
 "nerdtree keybinding
 map <F5> :NERDTreeToggle<CR>
