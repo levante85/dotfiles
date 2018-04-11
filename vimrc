@@ -30,8 +30,6 @@ Plug 'christoomey/vim-tmux-navigator'
 
 " colorschemes
 Plug 'flazz/vim-colorschemes'
-Plug 'fatih/molokai'
-Plug 'bluz71/vim-moonfly-colors'
 
 " live markdown preview & syntax
 Plug 'shime/vim-livedown', {'for':  'markdown'}
@@ -49,13 +47,12 @@ Plug 'klen/python-mode', {'for': 'python'}
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 
 "javascript
-"Plug 'mxw/vim-jsx'
-"Plug 'elzr/vim-json'
-"Plug 'walm/jshint.vim'
-"Plug 'marijnh/tern_for_vim'
-"Plug 'pangloss/vim-javascript'
-"Plug 'jelera/vim-javascript-syntax'
-
+Plug 'mxw/vim-jsx', {'for':'javascript'}
+Plug 'elzr/vim-json', {'for':'javascript'}
+Plug 'walm/jshint.vim', {'for':'javascript'}
+Plug 'marijnh/tern_for_vim', {'for':'javascript'}
+Plug 'pangloss/vim-javascript', {'for':'javascript'}
+Plug 'jelera/vim-javascript-syntax', {'for':'javascript'} 
 
 " go 
 Plug 'fatih/vim-go', {'for':'go'}
@@ -196,7 +193,7 @@ map <F5> :NERDTreeToggle<CR>
 let g:NERDTreeHijackNetrw = 0
 
 "ultisnip trigger
-let g:UltiSnipsExpandTrigger="<c-u>"
+let g:UltiSnipsExpandTrigger="<c-s>"
 
 "C++ run and build, rename, fix-include remaps
 au filetype cpp nmap <buffer><silent> <s-r> <Plug>(clang_rename-current)
