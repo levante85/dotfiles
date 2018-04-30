@@ -66,10 +66,10 @@ call plug#end()
 " general 
 "
 " default directory
-:cd /home/carlo/Dropbox/go/src/github.com/levante85/ 
+:cd /home/carlo/Dropbox/go/src/github.com/menefotto/ 
 
 
-colo github
+colo molokai
 syntax on
 filetype plugin indent on
 set number
@@ -127,6 +127,11 @@ let g:go_highlight_extra_types = 1
 " linting on save
 let g:go_metalinter_autosave = 1
 let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+
+"
+let g:go_list_type = "quickfix"
+let g:go_test_timeout = "15s"
+
 
 "cd to the current directory for newtab i.e. terminal
 " doesn't work on normal vim
